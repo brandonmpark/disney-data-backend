@@ -1,0 +1,16 @@
+{
+  "index": [
+    {
+      "key": "lastAttractionUpdate",
+      "val": 1694141051157,
+      "life": 1694227451157,
+      "tags": []
+    },
+    {
+      "key": "lastWaitTimeUpdate",
+      "val": 1694141248755,
+      "life": 1694227648755,
+      "tags": []
+    }
+  ]
+}
