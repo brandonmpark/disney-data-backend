@@ -1,4 +1,4 @@
-export const PORT = parseInt(Bun.env.PORT ?? "3000");
+export const PORT = "3000";
 
 export const ENV = Bun.env.NODE_ENV ?? "development";
 

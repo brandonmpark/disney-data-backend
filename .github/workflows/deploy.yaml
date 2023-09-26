@@ -37,4 +37,4 @@ jobs:
                 docker pull brandonmpark/park-data-backend:latest
                 docker stop park-data-backend || true
                 docker rm park-data-backend || true
-                docker run -d --name park-data-backend -p 80:3000 brandonmpark/park-data-backend:latest
+                docker run -d --name park-data-backend -p 80:3000 -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" brandonmpark/park-data-backend:latest
