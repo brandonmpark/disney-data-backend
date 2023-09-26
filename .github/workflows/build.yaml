@@ -1,0 +1,40 @@
+name: CI/CD
+
+on:
+    push:
+        branches:
+        - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Setup Bun
+          uses: oven-sh/setup-bun@v1
+          with: 
+            bun-version: latest
+        
+        - name: Install dependencies
+          run: bun install
+
+        - name: Build Docker image
+          run: |
+            docker build -t brandonmpark/park-data-backend:latest .
+            echo ${{ secrets.DOCKERHUB_KEY }} | docker login -u brandonmpark --password-stdin
+            docker push brandonmpark/park-data-backend:latest
+
+        - name: Deploy to DigitalOcean
+          uses: appleboy/ssh-action@master
+          with: 
+            host: ${{ secrets.DIGITALOCEAN_HOST }}
+            username: root
+            key: ${{ secrets.DIGITALOCEAN_KEY }}    
+            script: |
+                docker pull brandonmpark/park-data-backend:latest
+                docker stop park-data-backend || true
+                docker rm park-data-backend || true
+                docker run -d --name park-data-backend -p 80:3000 brandonmpark/park-data-backend:latest
