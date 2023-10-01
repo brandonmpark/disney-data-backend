@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const colors = {
     reset: "\x1b[0m",
     fgRed: "\x1b[31m",
@@ -40,6 +41,9 @@ export const log = (message: string, { type = "p", date = false } = {}) => {
             break;
         case "e":
             console.log(colors.fgRed, message, colors.reset);   
+            break;
+        default:
+            console.log(message);
             break;
     }
 };

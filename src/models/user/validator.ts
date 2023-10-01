@@ -33,7 +33,7 @@ const validatePassword = (password: any) => {
 };
 
 const validatePermissions = (permissions: any): string[] => {
-    if (permissions == undefined) return [];
+    if (permissions == null) return [];
     if (!Array.isArray(permissions))
         throw new CustomValidationError("Permissions must be an array");
     if (permissions.length === 0) return permissions;
@@ -61,13 +61,11 @@ const validatePermissions = (permissions: any): string[] => {
     return permissions.map(validate);
 };
 
-const validate = async (user: User): Promise<User> => {
-    return {
-        username: await validateUsername(user.username),
-        password: validatePassword(user.password),
-        permissions: validatePermissions(user.permissions),
-    };
-};
+const validate = async (user: User): Promise<User> => ({
+    username: await validateUsername(user.username),
+    password: validatePassword(user.password),
+    permissions: validatePermissions(user.permissions),
+});
 
 const validateLogin = async (
     user: LoginInfo

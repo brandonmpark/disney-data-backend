@@ -1,11 +1,12 @@
-import { Router } from 'express';
-const UsersRouter = Router();
+import { Router } from "express";
 import UserModel from "../models/user/model";
 
-import * as idValidator from "../utils/idValidator";
 import validator from "../models/user/validator";
 import * as auth from "../utils/auth";
+import * as idValidator from "../utils/idValidator";
 import * as permissions from "../utils/permissions";
+
+const UsersRouter = Router();
 
 UsersRouter.get("/get", async (req, res) => {
     permissions.check(req, "user-get");
@@ -22,7 +23,7 @@ UsersRouter.get("/get/:id", async (req, res) => {
 UsersRouter.post("/register", async (req, res) => {
     const user = await validator.validate(req.body);
     const savedUser = await new UserModel(user).save();
-    await permissions.grantDefault(savedUser._id); 
+    await permissions.grantDefault(savedUser._id);
     const token = auth.generateToken(savedUser);
     return res.status(201).json({ ...savedUser.toJSON(), token });
 });

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import mongoose from "mongoose";
 import type { User } from "../../types/user";
 

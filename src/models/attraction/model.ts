@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import mongoose from "mongoose";
 import type { Attraction } from "../../types/attraction";
 import { Age, Park, Status, Type } from "../../types/attraction";

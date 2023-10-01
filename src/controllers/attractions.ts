@@ -1,10 +1,11 @@
 import { Router } from "express";
 import AttractionModel from "../models/attraction/model";
-const AttractionsRouter = Router();
 
 import WaitTimeDataModel from "../models/waitTimeData/model";
 import * as idValidator from "../utils/idValidator";
 import * as permissions from "../utils/permissions";
+
+const AttractionsRouter = Router();
 
 AttractionsRouter.get("/get", async (req, res) => {
     permissions.check(req, "attraction-get");
@@ -50,7 +51,7 @@ AttractionsRouter.get("/get-data/:id", async (req, res) => {
         {
             $match: {
                 attractionId: attraction._id,
-            }
+            },
         },
         {
             $lookup: {
@@ -58,7 +59,7 @@ AttractionsRouter.get("/get-data/:id", async (req, res) => {
                 localField: "attractionId",
                 foreignField: "_id",
                 as: "attraction",
-            }
+            },
         },
         {
             $unwind: "$attraction",
@@ -69,7 +70,7 @@ AttractionsRouter.get("/get-data/:id", async (req, res) => {
                 _id: 1,
                 entries: 1,
             },
-        }
+        },
     ]).toArray();
     return res.json(data[0]);
 });

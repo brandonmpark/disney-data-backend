@@ -2,6 +2,7 @@ export const PORT = "3000";
 
 export const ENV = Bun.env.NODE_ENV ?? "development";
 
+// eslint-disable-next-line import/no-mutable-exports
 export let MONGODB_URI: string;
 switch (Bun.env.NODE_ENV) {
     case "test":

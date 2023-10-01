@@ -1,15 +1,16 @@
 import express from "express";
-import mongoose from "mongoose";
 import "express-async-errors";
-const app = express();
+import mongoose from "mongoose";
 
+import cors from "cors";
 import * as config from "./utils/config";
 import * as logger from "./utils/logger";
 
-import cors from "cors";
 import attractionsRouter from "./controllers/attractions";
 import usersRouter from "./controllers/users";
 import * as middleware from "./utils/middleware";
+
+const app = express();
 
 logger.log(`Starting service in ${config.ENV}...`, { type: "h1" });
 logger.log(`Connecting to MongoDB...`, { type: "b" });
