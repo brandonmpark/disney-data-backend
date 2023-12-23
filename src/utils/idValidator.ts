@@ -3,8 +3,8 @@ import { isObjectIdOrHexString } from "mongoose";
 import Attraction from "../models/attraction/model";
 import User from "../models/user/model";
 import type { Attraction as AttractionType } from "../types/attraction";
+import { CustomValidationError } from "../types/errors";
 import type { User as UserType } from "../types/user";
-import { CustomValidationError } from "./errors";
 
 export const getUser = async (
     userId: any

@@ -1,53 +1,66 @@
 /* eslint-disable no-console */
 const colors = {
     reset: "\x1b[0m",
-    fgRed: "\x1b[31m",
-    fgGreen: "\x1b[32m",
-    fgYellow: "\x1b[33m",
-    fgBlue: "\x1b[34m",
-    fgMagenta: "\x1b[35m",
-    fgCyan: "\x1b[36m",
-    fgWhite: "\x1b[37m",
-    fgGray: "\x1b[90m",
-    bgRed: "\x1b[41m",
-    bgGreen: "\x1b[42m",
-    bgYellow: "\x1b[43m",
-    bgBlue: "\x1b[44m",
-    bgMagenta: "\x1b[45m",
-    bgCyan: "\x1b[46m",
-    bgWhite: "\x1b[47m",
+    bright: "\x1b[1m",
+    dim: "\x1b[2m",
+    underscore: "\x1b[4m",
+    blink: "\x1b[5m",
+    reverse: "\x1b[7m",
+    hidden: "\x1b[8m",
+    fg: {
+        black: "\x1b[30m",
+        red: "\x1b[31m",
+        green: "\x1b[32m",
+        yellow: "\x1b[33m",
+        blue: "\x1b[34m",
+        magenta: "\x1b[35m",
+        cyan: "\x1b[36m",
+        white: "\x1b[37m",
+        crimson: "\x1b[38m",
+        gray: "\x1b[90m",
+    },
+    bg: {
+        black: "\x1b[40m",
+        red: "\x1b[41m",
+        green: "\x1b[42m",
+        yellow: "\x1b[43m",
+        blue: "\x1b[44m",
+        magenta: "\x1b[45m",
+        cyan: "\x1b[46m",
+        white: "\x1b[47m",
+        crimson: "\x1b[48m",
+    },
 };
 
 export const log = (message: string, { type = "p", date = false } = {}) => {
-    if (date)
-        console.log(colors.fgGray, new Date().toISOString(), colors.reset);
-
+    let color = colors.fg.white;
     switch (type) {
-        case "h1":
-            console.log(colors.fgMagenta, "=".repeat(message.length));
-            console.log(message);
-            console.log("=".repeat(message.length), colors.reset);
+        case "error":
+            color = colors.fg.red;
             break;
-        case "h2":
-            console.log(colors.fgCyan, "-".repeat(message.length));
-            console.log(message);
-            console.log("-".repeat(message.length), colors.reset);
+        case "warn":
+            color = colors.fg.yellow;
             break;
-        case "b":
-            console.log(colors.fgYellow, message, colors.reset);
+        case "info":
+            color = colors.fg.blue;
             break;
-        case "p":
-            console.log(message);
-            break;
-        case "e":
-            console.log(colors.fgRed, message, colors.reset);   
+        case "success":
+            color = colors.fg.green;
             break;
         default:
-            console.log(message);
+            color = colors.fg.white;
             break;
+    }
+
+    if (date) {
+        console.log(
+            `${colors.fg.gray}${new Date().toISOString()}${
+                colors.reset
+            } - ${color}${message}${colors.reset}`
+        );
+    } else {
+        console.log(`${color}${message}${colors.reset}`);
     }
 };
 
-export const error = (...args: string[]) => {
-    console.error(new Date().toISOString(), ...args);
-};
+export const error = (message: string) => log(message, { type: "error" });

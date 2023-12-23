@@ -1,8 +1,8 @@
 import { Request } from "express";
 import { Types } from "mongoose";
 import User from "../models/user/model";
+import { UnauthorizedError } from "../types/errors";
 import * as config from "./config";
-import { UnauthorizedError } from "./errors";
 
 const defaultPermissions = ["user-get"];
 

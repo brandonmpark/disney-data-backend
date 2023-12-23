@@ -23,9 +23,9 @@ jobs:
 
         - name: Build Docker image
           run: |
-            docker build -t brandonmpark/park-data-backend:latest .
+            docker build -t brandonmpark/disney-data-backend:latest .
             echo ${{ secrets.DOCKERHUB_KEY }} | docker login -u brandonmpark --password-stdin
-            docker push brandonmpark/park-data-backend:latest
+            docker push brandonmpark/disney-data-backend:latest
 
         - name: Deploy to DigitalOcean
           uses: appleboy/ssh-action@master
@@ -34,7 +34,7 @@ jobs:
             username: root
             key: ${{ secrets.DIGITALOCEAN_KEY }}    
             script: |
-                docker stop park-data-backend || true
-                docker rm brandonmpark/park-data-backend || true
-                docker pull brandonmpark/park-data-backend:latest
-                docker run -d --name park-data-backend -p 80:3000 -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" brandonmpark/park-data-backend:latest
+                docker stop disney-data-backend || true
+                docker rm brandonmpark/disney-data-backend || true
+                docker pull brandonmpark/disney-data-backend:latest
+                docker run -d --name disney-data-backend -p 80:3000 -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" brandonmpark/disney-data-backend:latest

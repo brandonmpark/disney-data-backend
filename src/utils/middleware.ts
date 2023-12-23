@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
+import { CustomValidationError, UnauthorizedError } from "../types/errors";
 import * as auth from "./auth";
 import { ENV } from "./config";
-import { CustomValidationError, UnauthorizedError } from "./errors";
 import * as logger from "./logger";
 
 export const permissionsChecker = async (

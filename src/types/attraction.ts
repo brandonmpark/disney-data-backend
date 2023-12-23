@@ -1,3 +1,5 @@
+import mongoose from "mongoose"
+
 export enum Status {
     OPEN = "open",
     CLOSED = "closed",
@@ -42,3 +44,16 @@ export interface Attraction {
     waitTimeLastUpdated: Date;
 }
 
+export interface AttractionWithId extends Attraction {
+    _id: mongoose.Types.ObjectId;
+}
+
+export interface Metadata {
+    todaysHours: [number, number] | [];
+    todaysTimes: number[];
+}
+
+export interface LabeledMetadata extends Metadata {
+    name: string;
+    park: Park;
+}
