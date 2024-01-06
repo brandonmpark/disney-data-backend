@@ -5,7 +5,7 @@ import get from "./get";
 import write from "./write";
 
 const fetch = async () => {
-     logger.log("Fetching wait times...", { type: "h1" });
+    logger.log("Fetching wait times...", { type: "h1" });
     const timestamp = new Date();
     const weatherData = await weather.get();
     await Promise.all([

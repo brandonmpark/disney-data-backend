@@ -1,5 +1,5 @@
-import Attraction from "../../models/attraction/model";
-import WaitTimeData from "../../models/waitTimeData/model";
+import Attraction from "../../models/attraction";
+import WaitTimeData from "../../models/waitTimeData";
 import { AttractionWithId, Park } from "../../types/attraction";
 import type { LabeledWaitTimeEntry } from "../../types/waitTime";
 import * as logger from "../../utils/logger";

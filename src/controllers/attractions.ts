@@ -1,7 +1,7 @@
 import { Router } from "express";
-import AttractionModel from "../models/attraction/model";
+import Attraction from "../models/attraction";
 
-import WaitTimeDataModel from "../models/waitTimeData/model";
+import WaitTimeData from "../models/waitTimeData";
 import * as idValidator from "../utils/idValidator";
 import * as permissions from "../utils/permissions";
 
@@ -9,7 +9,7 @@ const AttractionsRouter = Router();
 
 AttractionsRouter.get("/get", async (req, res) => {
     permissions.check(req, "attraction-get");
-    const attractions = await AttractionModel.find({});
+    const attractions = await Attraction.find({});
     return res.json(attractions);
 });
 
@@ -21,7 +21,7 @@ AttractionsRouter.get("/get/:id", async (req, res) => {
 
 AttractionsRouter.get("/get-data", async (req, res) => {
     permissions.check(req, "attraction-get");
-    const data = await WaitTimeDataModel.aggregate([
+    const data = await WaitTimeData.aggregate([
         {
             $lookup: {
                 from: "attractions",
@@ -40,14 +40,14 @@ AttractionsRouter.get("/get-data", async (req, res) => {
                 entries: 1,
             },
         },
-    ]).toArray();
+    ]);
     return res.json(data);
 });
 
 AttractionsRouter.get("/get-data/:id", async (req, res) => {
     permissions.check(req, "attraction-get");
     const attraction = await idValidator.getAttraction(req.params.id);
-    const data = await WaitTimeDataModel.aggregate([
+    const data = await WaitTimeData.aggregate([
         {
             $match: {
                 attractionId: attraction._id,
@@ -71,7 +71,7 @@ AttractionsRouter.get("/get-data/:id", async (req, res) => {
                 entries: 1,
             },
         },
-    ]).toArray();
+    ]);
     return res.json(data[0]);
 });
 

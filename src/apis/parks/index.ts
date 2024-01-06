@@ -3,7 +3,6 @@ import * as logger from "../../utils/logger";
 import fetch from "./fetch";
 
 const pollWaitTimes = () => {
-    fetch();
     const job = new CronJob("*/5 6-23 * * *", async () => {
         try {
             await fetch();

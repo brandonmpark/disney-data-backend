@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { Types } from "mongoose";
-import User from "../models/user/model";
+import User from "../models/user";
 import { UnauthorizedError } from "../types/errors";
 import * as config from "./config";
 

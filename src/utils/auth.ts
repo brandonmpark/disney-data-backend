@@ -2,7 +2,7 @@ import type { Request } from "express";
 import type { JwtPayload } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
 import type { HydratedDocument } from "mongoose";
-import User from "../models/user/model";
+import User from "../models/user";
 import type { User as UserType } from "../types/user";
 import * as config from "./config";
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import UserModel from "../models/user/model";
+import UserModel from "../models/user";
 
 import validator from "../models/user/validator";
 import * as auth from "../utils/auth";

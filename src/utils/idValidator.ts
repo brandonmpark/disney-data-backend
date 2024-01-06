@@ -1,7 +1,7 @@
 import type { HydratedDocument } from "mongoose";
 import { isObjectIdOrHexString } from "mongoose";
-import Attraction from "../models/attraction/model";
-import User from "../models/user/model";
+import Attraction from "../models/attraction";
+import User from "../models/user";
 import type { Attraction as AttractionType } from "../types/attraction";
 import { CustomValidationError } from "../types/errors";
 import type { User as UserType } from "../types/user";

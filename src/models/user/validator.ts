@@ -1,8 +1,8 @@
 import type { HydratedDocument } from "mongoose";
+import UserModel from ".";
 import { CustomValidationError } from "../../types/errors";
 import type { LoginInfo, User } from "../../types/user";
 import * as auth from "../../utils/auth";
-import UserModel from "./model";
 
 const validateUsername = async (username: any) => {
     if (!username || typeof username !== "string" || username.length < 3)
