@@ -35,6 +35,6 @@ jobs:
             key: ${{ secrets.DIGITALOCEAN_KEY }}    
             script: |
                 docker stop disney-data-backend || true
-                docker rm brandonmpark/disney-data-backend || true
+                docker rm disney-data-backend || true
                 docker pull brandonmpark/disney-data-backend:latest
-                docker run -d --name disney-data-backend -p 80:3000 -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" brandonmpark/disney-data-backend:latest
+                docker run -d --name disney-data-backend -p 80:3000 -e PRODUCTION_MONGODB_URI="${{ secrets.PRODUCTION_MONGODB_URI }}" -e SECRET="${{ secrets.SECRET }}" brandonmpark/disney-data-backend:latest
